@@ -6,7 +6,7 @@ import './styles.css'
 import { App } from './App'
 
 useTexture.preload('/textures/heightmap_1024.png')
-useTexture.preload('/textures/no_sound.png')
+// useTexture.preload('/textures/no_sound.png') // todo may or may not be needed (see stylesheet)
 useGLTF.preload('/models/track-draco.glb')
 useGLTF.preload('/models/chassis-draco.glb')
 useGLTF.preload('/models/wheel-draco.glb')
