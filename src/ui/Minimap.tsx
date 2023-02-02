@@ -57,7 +57,7 @@ function MinimapTexture({ buffer }: { buffer: WebGLRenderTarget }) {
 
 export function Minimap({ size = 200 }): JSX.Element {
   const player = useRef<Sprite>(null)
-  const miniMap = useRef<Mesh>(null)
+  const miniMap = useRef<Sprite>(null)
   const miniMapCamera = useRef<THREE.OrthographicCamera>(null)
   const [virtualScene] = useState(() => new Scene())
   const mask = useTexture('textures/mask.svg')

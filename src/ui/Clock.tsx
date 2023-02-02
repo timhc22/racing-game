@@ -4,7 +4,8 @@ import { useStore } from '../store'
 
 const getTime = (finished: number, start: number) => {
   const time = start && !finished ? Date.now() - start : 0
-  return `${readableTime(time)}`
+  return `${time}`
+  // return `${readableTime(time)}`
 }
 
 export function Clock() {

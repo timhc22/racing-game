@@ -26,7 +26,8 @@ interface WheelProps extends CylinderProps {
   leftSide?: boolean
 }
 
-export const Wheel = forwardRef<Object3D, WheelProps>(({ leftSide, ...props }, ref) => {
+// todo have changed wheel to any because erroring
+export const Wheel = forwardRef<Object3D, WheelProps>(({ leftSide, ...props }, ref: any) => {
   const { radius } = useStore((state) => state.wheelInfo)
   const { nodes, materials } = useGLTF('/models/wheel-draco.glb') as WheelGLTF
   const scale = radius / 0.34
