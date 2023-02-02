@@ -54,7 +54,7 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     wheelInfos,
   }
 
-  // @ts-expect-error - need to update use-cannon types
+  // todo removed because causing errors // @ts-expect-error - need to update use-cannon types
   const [, api] = useRaycastVehicle(() => raycast, undefined, [wheelInfo])
 
   useLayoutEffect(() => api.sliding.subscribe((sliding) => (mutation.sliding = sliding)), [api])

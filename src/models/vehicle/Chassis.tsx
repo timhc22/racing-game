@@ -4,14 +4,13 @@ import { forwardRef, useRef, useCallback, useEffect, useLayoutEffect } from 'rea
 import { useBox } from '@react-three/cannon'
 import { useGLTF, PositionalAudio } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { Color, Vector3, MathUtils } from 'three'
+import { Color, Vector3, MathUtils, Group } from 'three'
 
 import type { PropsWithChildren, RefObject } from 'react'
 import type { BoxProps } from '@react-three/cannon'
 import type { GLTF } from 'three-stdlib'
 import type { BoxBufferGeometry, Mesh, MeshStandardMaterial, Object3D, PositionalAudio as PositionalAudioImpl } from 'three'
-// TODO: Export this from the index file
-import type { CollideEvent } from '@react-three/cannon/dist/setup'
+import type { CollideEvent } from '@react-three/cannon'
 
 import { getState, mutation, useStore } from '../../store'
 
@@ -73,10 +72,12 @@ title: Classic Muscle car
 
 type MaterialMesh = Mesh<BoxBufferGeometry, MeshStandardMaterial>
 export type ChassisProps = PropsWithChildren<BoxProps>
-export const Chassis = forwardRef<Object3D, ChassisProps>(({ args = [2, 1.1, 4.7], mass = 500, children, ...props }, ref) => {
+
+// todo have put ref to 'any' type as is expecting Group, but Group doesn't work
+export const Chassis = forwardRef<Object3D, ChassisProps>(({ args = [2, 1.1, 4.7], mass = 500, children, ...props }, ref: any) => {
   const glass = useRef<MaterialMesh>(null!)
   const brake = useRef<MaterialMesh>(null!)
-  const wheel = useRef<MaterialMesh>(null!)
+  const wheel = useRef<Group>(null!)
   const needle = useRef<MaterialMesh>(null!)
   const crashAudio = useRef<PositionalAudioImpl>(null!)
   const [camera, ready, set, vehicleConfig] = useStore((s) => [s.camera, s.ready, s.set, s.vehicleConfig])
@@ -89,7 +90,7 @@ export const Chassis = forwardRef<Object3D, ChassisProps>(({ args = [2, 1.1, 4.7
     }, 200),
     [],
   )
-  // @ts-expect-error - Need updated types from use-cannon
+  // todo removed because causing errors // @ts-expect-error - Need updated types from use-cannon
   const [, api] = useBox(() => ({ mass, args, allowSleep: false, onCollide, ...props }), ref as RefObject<Object3D>)
 
   useEffect(() => {

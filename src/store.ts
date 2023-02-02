@@ -90,7 +90,7 @@ type BaseState = {
 export interface IState extends BaseState {
   actions: Record<ActionNames, () => void>
   // TODO: This should be PublicApi
-  api: Api[1] | null
+  api: Api<any>[1] | null
   camera: Camera
   chassisBody: RefObject<Object3D>
   controls: Controls
@@ -100,6 +100,7 @@ export interface IState extends BaseState {
   level: RefObject<Group>
   set: Setter
   start: number
+  session: null
   vehicleConfig: VehicleConfig
   wheelInfo: WheelInfo
   wheels: [RefObject<Object3D>, RefObject<Object3D>, RefObject<Object3D>, RefObject<Object3D>]
@@ -116,6 +117,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     onStart: () => {
       set({ finished: 0, start: Date.now() })
     },
+    onCheckpoint: () => {},
     reset: () => {
       mutation.boost = maxBoost
 
